@@ -5,6 +5,7 @@
 		<parameter name="path" value="/"/>
 		<classes>
 		    <class name="selenium_course_kolomoets.LoginTest"/>
+		    <class name="selenium_course_kolomoets.AddMovieWithDescription"/>
 		</classes>
 	</test>  
 </suite>

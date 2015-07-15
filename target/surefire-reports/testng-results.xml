@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Tests" duration-ms="11792" started-at="2015-07-08T12:02:55Z" finished-at="2015-07-08T12:03:07Z">
+  <suite name="Tests" duration-ms="13883" started-at="2015-07-15T11:44:22Z" finished-at="2015-07-15T11:44:36Z">
     <groups>
     </groups>
-    <test name="Test1" duration-ms="11792" started-at="2015-07-08T12:02:55Z" finished-at="2015-07-08T12:03:07Z">
+    <test name="Test1" duration-ms="13883" started-at="2015-07-15T11:44:22Z" finished-at="2015-07-15T11:44:36Z">
       <class name="selenium_course_kolomoets.LoginTest">
-        <test-method status="PASS" signature="init()[pri:0, instance:selenium_course_kolomoets.LoginTest@583f5cc3]" name="init" is-config="true" duration-ms="9416" started-at="2015-07-08T15:02:55Z" finished-at="2015-07-08T15:03:04Z">
+        <test-method status="PASS" signature="init()[pri:0, instance:selenium_course_kolomoets.LoginTest@42e9485]" name="init" is-config="true" duration-ms="11474" started-at="2015-07-15T14:44:22Z" finished-at="2015-07-15T14:44:34Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="testUntitled()[pri:0, instance:selenium_course_kolomoets.LoginTest@583f5cc3]" name="testUntitled" duration-ms="2332" started-at="2015-07-08T15:03:04Z" finished-at="2015-07-08T15:03:07Z">
+        <test-method status="PASS" signature="testLogin()[pri:0, instance:selenium_course_kolomoets.LoginTest@42e9485]" name="testLogin" duration-ms="2385" started-at="2015-07-15T14:44:34Z" finished-at="2015-07-15T14:44:36Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testUntitled -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:selenium_course_kolomoets.LoginTest@583f5cc3]" name="tearDown" is-config="true" duration-ms="1002" started-at="2015-07-08T15:03:07Z" finished-at="2015-07-08T15:03:08Z">
+        </test-method> <!-- testLogin -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:selenium_course_kolomoets.LoginTest@42e9485]" name="tearDown" is-config="true" duration-ms="1258" started-at="2015-07-15T14:44:36Z" finished-at="2015-07-15T14:44:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

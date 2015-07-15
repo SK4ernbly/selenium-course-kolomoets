@@ -2,29 +2,33 @@ package selenium_course_kolomoets;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddTest {
-  private WebDriver driver;
-  private String baseUrl;
+public class AddMovieWithDescription extends TestBase {
+//  private WebDriver driver;
+//  private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @Before
-  public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://localhost/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
+//  @Before
+//  public void setUp() throws Exception {
+//    driver = new FirefoxDriver();
+//    baseUrl = "http://localhost/";
+//    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//  }
 
   @Test
-  public void testAdd() throws Exception {
-    driver.get(baseUrl + "/php4dvd/?go=add");
+  public void AddMovie() throws Exception {
+	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	driver.findElement(By.xpath(".//*[@id='content']/section/nav/ul/li[1]/div/div/a/img")).click();
     driver.findElement(By.name("name")).clear();
     //проверка, что появилась подсказка о том, что поле "name" обязательное:
     isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[2]/td[2]/label"));
@@ -49,11 +53,12 @@ public class AddTest {
     driver.findElement(By.name("country")).clear();
     driver.findElement(By.name("country")).sendKeys("USA");
     driver.findElement(By.id("submit")).click();
+    Thread.sleep(3000);
     driver.findElement(By.cssSelector("h1")).click();
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
