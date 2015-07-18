@@ -2,53 +2,61 @@ package selenium_course_kolomoets;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-import org.junit.*;
+
+import org.testng.*;
+import org.testng.annotations.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
+import org.junit.After;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class DeleteDescription extends TestBase{
-//  private WebDriver driver;
-//  private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-//  @Before
-//  public void setUp() throws Exception {
-//    driver = new FirefoxDriver();
-//    baseUrl = "http://localhost/";
-//    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//  }
-
   @Test
-  public void testUntitled3() throws Exception {
-    driver.get(baseUrl + "/php4dvd/#!/sort/name%20asc/page/1/results/8/");
-    driver.findElement(By.cssSelector("#movie_15 > div.movie_cover > div.nocover")).click();
-    driver.findElement(By.cssSelector("img[alt=\"Edit\"]")).click();
-    driver.findElement(By.name("aka")).clear();
-    driver.findElement(By.name("aka")).sendKeys("");
-    driver.findElement(By.name("year")).clear();
-    driver.findElement(By.name("year")).sendKeys("");
-    driver.findElement(By.name("duration")).clear();
-    driver.findElement(By.name("duration")).sendKeys("");
-    driver.findElement(By.name("rating")).clear();
-    driver.findElement(By.name("rating")).sendKeys("");
-    driver.findElement(By.name("plots")).clear();
-    driver.findElement(By.name("plots")).sendKeys("");
-    driver.findElement(By.id("text_languages_0")).clear();
-    driver.findElement(By.id("text_languages_0")).sendKeys("");
-    driver.findElement(By.name("subtitles")).clear();
-    driver.findElement(By.name("subtitles")).sendKeys("");
-    driver.findElement(By.name("country")).clear();
-    driver.findElement(By.name("country")).sendKeys("");
+  public void delDescription() throws Exception {
+
+    driver.findElement(By.cssSelector(".movie_cover")).click();
+    driver.findElement(By.xpath(".//*[@id='content']/section/nav/ul/li[3]/div/div/a/img")).click();
+    
+    //удаляем содержимое всех полей, в том числе и обязательных:
+    cleanOut(driver.findElement(By.name("name")));
+    cleanOut(driver.findElement(By.name("aka")));
+    cleanOut(driver.findElement(By.name("year")));
+    cleanOut(driver.findElement(By.name("duration")));
+    cleanOut(driver.findElement(By.name("rating")));
+    cleanOut(driver.findElement(By.name("plotoutline")));
+    cleanOut(driver.findElement(By.name("plots")));
+    cleanOut(driver.findElement(By.id("text_languages_0")));
+    cleanOut(driver.findElement(By.name("subtitles")));
+    cleanOut(driver.findElement(By.name("country")));    
+
+    //пытаемся отправить форму с незаполненными обязательными полями. Должны появиться подсказки возле обяз. полей:
     driver.findElement(By.id("submit")).click();
-    driver.findElement(By.name("year")).clear();
-    driver.findElement(By.name("year")).sendKeys("2011");
+    if (!isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label")) && !isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[2]/td[2]/label")))
+    {
+    	System.out.println("Element(s) not found");
+    	String e = null;
+		throw new org.openqa.selenium.NoSuchElementException(e);   	
+    }
+
+    driver.findElement(By.name("name")).sendKeys(Keys.CONTROL + "z");
+    driver.findElement(By.name("year")).sendKeys(Keys.CONTROL + "z");
     driver.findElement(By.id("submit")).click();
     driver.findElement(By.cssSelector("h1")).click();
   }
+  
+  private void cleanOut(WebElement element) throws InterruptedException {
+	  element.sendKeys(Keys.CONTROL + "a");
+	  Thread.sleep(200);
+	  element.sendKeys(Keys.DELETE);
+	
+}
 
   @After
   public void tearDown() {

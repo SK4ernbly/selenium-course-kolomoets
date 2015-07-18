@@ -3,7 +3,8 @@ package selenium_course_kolomoets;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
+import org.testng.*;
+import org.testng.annotations.*;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -13,34 +14,34 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class AddMovieWithDescription extends TestBase {
-//  private WebDriver driver;
-//  private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-//  @Before
-//  public void setUp() throws Exception {
-//    driver = new FirefoxDriver();
-//    baseUrl = "http://localhost/";
-//    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//  }
-
   @Test
   public void AddMovie() throws Exception {
-	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.findElement(By.xpath(".//*[@id='content']/section/nav/ul/li[1]/div/div/a/img")).click();
-    driver.findElement(By.name("name")).clear();
-    //проверка, что появилась подсказка о том, что поле "name" обязательное:
-    isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[2]/td[2]/label"));
-    //попытка отправить форму с незаполненым обяз.полем. Должны остаться на той же странице(т.е.остальные элементы должны находиться)
+	
+    //РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РµСЃС‚СЊ РїРѕРґСЃРєР°Р·РєР° Рѕ С‚РѕРј, С‡С‚Рѕ РїРѕР»Рµ "name" РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ:
+    if (!isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[2]/td[2]/label"))){
+    	System.out.println("Element not found");
+    	String e = null;
+		throw new NoSuchElementException(e);   	
+    }    
+    //РїРѕРїС‹С‚РєР° РѕС‚РїСЂР°РІРёС‚СЊ С„РѕСЂРјСѓ СЃ РЅРµР·Р°РїРѕР»РЅРµРЅРЅС‹РјРё РѕР±СЏР·. РїРѕР»СЏРјРё. Р”РѕР»Р¶РЅС‹ РѕСЃС‚Р°С‚СЊСЃСЏ РЅР° С‚РѕР№ Р¶Рµ СЃС‚СЂР°РЅРёС†Рµ(С‚.Рµ. РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РґРѕР»Р¶РЅС‹ РЅР°С…РѕРґРёС‚СЊСЃСЏ) 
     driver.findElement(By.id("submit")).click();
     
     driver.findElement(By.name("name")).sendKeys("test_7");
     driver.findElement(By.name("aka")).clear();
     driver.findElement(By.name("aka")).sendKeys("Test7");
-    driver.findElement(By.name("year")).clear();
     
-    isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label"));
+    //РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РµСЃС‚СЊ РїРѕРґСЃРєР°Р·РєР° Рѕ С‚РѕРј, С‡С‚Рѕ РїРѕР»Рµ "year" РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ:
+    if (!isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label"))){
+    	System.out.println("Element not found");
+    	String e = null;
+		throw new NoSuchElementException(e);   	
+    }
+    //РїРѕРїС‹С‚РєР° РѕС‚РїСЂР°РІРёС‚СЊ С„РѕСЂРјСѓ СЃ РЅРµР·Р°РїРѕР»РЅРµРЅРЅС‹Рј РѕР±СЏР·.РїРѕР»РµРј "year". Р”РѕР»Р¶РЅС‹ РѕСЃС‚Р°С‚СЊСЃСЏ РЅР° С‚РѕР№ Р¶Рµ СЃС‚СЂР°РЅРёС†Рµ(С‚.Рµ.РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РґРѕР»Р¶РЅС‹ РЅР°С…РѕРґРёС‚СЊСЃСЏ)
     driver.findElement(By.id("submit")).click();
     
     driver.findElement(By.name("year")).sendKeys("2001");
@@ -53,25 +54,15 @@ public class AddMovieWithDescription extends TestBase {
     driver.findElement(By.name("country")).clear();
     driver.findElement(By.name("country")).sendKeys("USA");
     driver.findElement(By.id("submit")).click();
-    Thread.sleep(3000);
     driver.findElement(By.cssSelector("h1")).click();
   }
 
-  @After
-  public void tearDown() {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
 
   private boolean isElementPresent(By by) {
     try {
       driver.findElement(by);
       return true;
     } catch (NoSuchElementException e) {
-//    	System.out.println(e.toString());
       return false;
     }
   }

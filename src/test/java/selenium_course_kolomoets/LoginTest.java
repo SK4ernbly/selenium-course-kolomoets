@@ -16,7 +16,7 @@ public class LoginTest extends TestBase {
 
   @Test
   public void testLogin() throws Exception {
-	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.get(baseUrl + "/php4dvd/");
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
