@@ -7,6 +7,7 @@
 		    <class name="selenium_course_kolomoets.LoginTest"/>
 		    <class name="selenium_course_kolomoets.AddMovieWithDescription"/>
 		    <class name="selenium_course_kolomoets.DeleteDescription"/>
+		    <class name="selenium_course_kolomoets.Search"/>
 		</classes>
 	</test>  
 </suite>

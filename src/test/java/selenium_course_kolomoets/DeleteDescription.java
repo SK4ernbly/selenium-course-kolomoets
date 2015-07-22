@@ -25,37 +25,40 @@ public class DeleteDescription extends TestBase{
     driver.findElement(By.xpath(".//*[@id='content']/section/nav/ul/li[3]/div/div/a/img")).click();
     
     //удаляем содержимое всех полей, в том числе и обязательных:
-    cleanOut(driver.findElement(By.name("name")));
+    clearAndCheckMandatoryFields();
+
     cleanOut(driver.findElement(By.name("aka")));
-    cleanOut(driver.findElement(By.name("year")));
     cleanOut(driver.findElement(By.name("duration")));
     cleanOut(driver.findElement(By.name("rating")));
     cleanOut(driver.findElement(By.name("plotoutline")));
     cleanOut(driver.findElement(By.name("plots")));
     cleanOut(driver.findElement(By.id("text_languages_0")));
     cleanOut(driver.findElement(By.name("subtitles")));
-    cleanOut(driver.findElement(By.name("country")));    
-
-    //пытаемся отправить форму с незаполненными обязательными полями. Должны появиться подсказки возле обяз. полей:
-    driver.findElement(By.id("submit")).click();
-    if (!isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label")) && !isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[2]/td[2]/label")))
-    {
-    	System.out.println("Element(s) not found");
-    	String e = null;
-		throw new org.openqa.selenium.NoSuchElementException(e);   	
-    }
-
-    driver.findElement(By.name("name")).sendKeys(Keys.CONTROL + "z");
-    driver.findElement(By.name("year")).sendKeys(Keys.CONTROL + "z");
+    cleanOut(driver.findElement(By.name("country")));
+    
     driver.findElement(By.id("submit")).click();
     driver.findElement(By.cssSelector("h1")).click();
   }
   
-  private void cleanOut(WebElement element) throws InterruptedException {
+  private void clearAndCheckMandatoryFields() throws InterruptedException{
+	  cleanOut(driver.findElement(By.name("name")));
+	  cleanOut(driver.findElement(By.name("year")));
+	//пытаемся отправить форму с незаполненными обязательными полями. Должны появиться подсказки возле обяз. полей:
+	  driver.findElement(By.id("submit")).click();
+	  if (!isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[4]/td[2]/label")) || !isElementPresent(By.xpath(".//*[@id='updateform']/table/tbody/tr[2]/td[2]/label")))
+	    {
+	    	System.out.println("Element(s) not found");
+	    	String e = null;
+			throw new org.openqa.selenium.NoSuchElementException(e);   	
+	    }
+	  driver.findElement(By.name("name")).sendKeys(Keys.CONTROL + "z");
+	  driver.findElement(By.name("year")).sendKeys(Keys.CONTROL + "z");
+  }
+  
+  protected void cleanOut(WebElement element) throws InterruptedException {
 	  element.sendKeys(Keys.CONTROL + "a");
 	  Thread.sleep(200);
 	  element.sendKeys(Keys.DELETE);
-	
 }
 
   @After
